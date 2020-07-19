@@ -44,9 +44,13 @@
 (defn keycode->keyword [keycode]
   (condp = keycode
     GLFW/GLFW_KEY_LEFT :left
+    GLFW/GLFW_KEY_A :left
     GLFW/GLFW_KEY_RIGHT :right
+    GLFW/GLFW_KEY_D :right
     GLFW/GLFW_KEY_UP :up
+    GLFW/GLFW_KEY_W :up
     GLFW/GLFW_KEY_DOWN :down
+    GLFW/GLFW_KEY_S :down
     nil))
 
 (defn on-key! [window keycode scancode action mods]
@@ -130,13 +134,19 @@
   (GLFW/glfwWindowHint GLFW/GLFW_CONTEXT_VERSION_MINOR 3)
   (GLFW/glfwWindowHint GLFW/GLFW_OPENGL_FORWARD_COMPAT GL33/GL_TRUE)
   (GLFW/glfwWindowHint GLFW/GLFW_OPENGL_PROFILE GLFW/GLFW_OPENGL_CORE_PROFILE)
-  (if-let [window (GLFW/glfwCreateWindow 1024 768 "Hello, world!" 0 0)]
+  (if-let [window (GLFW/glfwCreateWindow 1024 768 "CLEMENTINE" 0 0)]
     (do
       (GLFW/glfwMakeContextCurrent window)
       (GLFW/glfwSwapInterval 1)
       (GL/createCapabilities)
       (->Window window))
     (throw (Exception. "Failed to create window"))))
+
+(defn clock-edge [game tick]
+  (let [x 0
+        time (:total-time game)]
+    
+    x))
 
 (defn start [game window]
   (let [handle (:handle window)

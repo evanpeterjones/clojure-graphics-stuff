@@ -40,7 +40,11 @@
 
 (def screen-entity
   {:viewport {:x 0 :y 0 :width 0 :height 0}
-   :clear {:color [(/ 255 255) (/ 216 255) (/ 230 255) 1] :depth 1}})
+   :clear {:color [(/ 0 255) (/ 216 255) (/ 230 255) 1] :depth 1}})
+
+(defprotocol Particle
+  (next-position [])
+  ())
 
 (defn tick [game]
   (let [{:keys [pressed-keys
@@ -56,6 +60,7 @@
       ;; render the background
       (c/render game (update screen-entity :viewport
                              assoc :width game-width :height game-height))
+
       ;; get the current player image to display
       (when-let [player (get player-images player-image-key)]
         (let [player-width (/ game-width 10)

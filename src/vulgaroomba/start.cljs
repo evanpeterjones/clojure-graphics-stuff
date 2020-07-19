@@ -25,7 +25,7 @@
           (let [bounds (.getBoundingClientRect canvas)
                 x (- (.-clientX event) (.-left bounds))
                 y (- (.-clientY event) (.-top bounds))]
-            (log (str "x: " x "\ny: " y))
+            ;;(log (str "x: " x "\ny: " y))
             (assoc state :mouse-x x :mouse-y y)))))))
 
 (defn keycode->keyword [keycode]
